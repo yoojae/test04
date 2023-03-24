@@ -1,4 +1,6 @@
+import 'package:shop/Animation/FadeAnimation.dart';
 import 'package:flutter/material.dart';
+import 'package:shop/Item.dart';
 
 void main() => runApp(
   MaterialApp(
@@ -84,9 +86,9 @@ class HomePage extends StatelessWidget {
               Container(
                 height: 20,
               ),
-              listItem(image: 'assets/shampoo.png', tag: 'shampoo'),
-              listItem(image: 'assets/meal.png', tag: 'meal'),
-              listItem(image: 'assets/plan.png', tag: 'plan'),
+              listItem(image: 'assets/shampoo.png', tag: 'shampoo', context: context),
+              listItem(image: 'assets/meal.png', tag: 'meal', context: context),
+              listItem(image: 'assets/checklist.png', tag: 'plan', context: context),
             ],
           ),
         ),
@@ -95,10 +97,13 @@ class HomePage extends StatelessWidget {
   }
 }
 
-Widget listItem({image, tag}) {
+Widget listItem({image, tag, context}) {
   return Hero(
       tag: tag,
       child: GestureDetector(
+        onTap: () {
+          Navigator.push(context, MaterialPageRoute(builder: (context) => Health(image: image,)));
+        },
         child: Container(
           width: double.infinity,
           height: 250,
@@ -135,19 +140,17 @@ Widget listItem({image, tag}) {
                           Text('건강', style: TextStyle(
                             fontSize: 14,
                             color: Colors.white
-                          ),)
+                          ),),
                         ],
                       )),
-                  Center(
-                    child: Container(
-                      width: 35,
-                      height: 35,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        shape: BoxShape.circle,
-                      ),
-                      child: Icon(Icons.favorite_outline_rounded, color: Colors.grey, size: 20,),
+                  Container(
+                    width: 35,
+                    height: 35,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      shape: BoxShape.circle,
                     ),
+                    child: Icon(Icons.favorite_outline_rounded, color: Colors.grey, size: 20,),
                   ),
                 ],
               ),
